@@ -1,42 +1,18 @@
-import { useState, useEffect } from "react";
-
-
-export default function MenuItem() {
-    const [menuItems, setMenuItems] = useState([]); // Initialize as an array
-
-    useEffect(() => {
-        async function fetchMenu() {
-            try {
-                const response = await fetch('http://localhost:3000/meals');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch menu');
-                }
-                const resData = await response.json();
-                setMenuItems(resData);
-            } catch (error) {
-                console.error('Error fetching menu:', error);
-            }
-        }
-
-        fetchMenu();
-    }, []);
-
-
+export default function MenuItem({meal}) {
 
     return (
-        <>
-        {menuItems.map((item) => (
-            <article key={item.id} className="meal-item">
-                <img
-                    src={`http://localhost:3000/${item.image}`}
-                    alt={`Image of ${item.name}`}
-                />
-                <h3>{item.name}</h3>
-                <p className="meal-item-price">{item.price}$</p>
-                <p className="meal-item-description">{item.description}</p>
-                <button className="button">Add to Cart</button>
+        <li className="meal-item">
+            <article>
+                <img src={`http://localhost:3000/${meal.image}`} alt={meal.name} />
+                <div>
+                    <h3>{meal.name}</h3>
+                    <p className="meal-item-price">{meal.price}</p>
+                    <p className="meal-item-description">{meal.description}</p>
+                </div>
+                <p className="meal-item-actions">
+                    <button>Add to Cart</button>
+                </p>
             </article>
-        ))}
-        </>
+        </li>
     )
 }
