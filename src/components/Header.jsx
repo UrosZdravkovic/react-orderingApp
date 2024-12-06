@@ -1,16 +1,16 @@
+import Button from './UI/Button'
 import logo from '../assets/logo.jpg'
 
 export default function Header() {
     return (
-        <div id="main-header">
-            <div id="title">
-                <img src={logo} alt="" />
+        <header id='main-header'>
+            <div id='title'>
+                <img src={logo} alt="A restaurant" />
                 <h1>ReactFood</h1>
-            </div>
+            </div>          
             <nav>
-                <button id='title-img'> Cart (0) </button>
-            </nav>
-            
-        </div>
+                <Button textOnly> Cart (0)</Button>
+            </nav>  
+        </header>
     )
 }
