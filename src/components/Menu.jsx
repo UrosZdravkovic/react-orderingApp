@@ -1,27 +1,17 @@
-import { useEffect, useState } from "react";
 import MenuItem from './MenuItem.jsx'
+import useHttp from '../useHttp.js';
 
+const requestConfig = {};
 
 export default function Menu() {
 
-    const [menuItems, setMenuItems] = useState([]); // Initialize as an array
 
-    useEffect(() => {
-        async function fetchMenu() {
-            try {
-                const response = await fetch('http://localhost:3000/meals');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch menu');
-                }
-                const resData = await response.json();
-                setMenuItems(resData);
-            } catch (error) {
-                console.error('Error fetching menu:', error);
-            }
-        }
+    const {data: menuItems, isLoading, error} = useHttp({url: 'http://localhost:3000/meals', config: requestConfig, initialData: []});
 
-        fetchMenu();
-    }, []);
+    if (isLoading) {
+        return <p>Fetching meals...</p>
+    }
+
 
     return (
         <div id="meals">
