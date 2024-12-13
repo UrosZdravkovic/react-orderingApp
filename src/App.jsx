@@ -8,11 +8,7 @@ import Checkout from "./components/Checkout";
 
 
 function App() {
-
-  function handleAddItemsTocart() {
-
-  }
-
+  
   return (
     <UserProgressContextProvider>
       <CartContextProvider>
